@@ -96,24 +96,6 @@ export class PickList {
                 label: "$(github)    Github                            ",
                 description: "Github信息",
                 imageType: 12
-            },
-            {
-                label: "$(heart)    Support                          ",
-                description: "请作者喝一杯咖啡吧~       ",
-                imageType: 14,
-                path: "//resources//support.jpg"
-            },
-            {
-                label: "$(organization)    Wechat                           ",
-                description: "微信群聊~      ",
-                imageType: 14,
-                path: "//resources//wx.jpg"
-            },
-            {
-                label: "$(ports-open-browser-icon)    Online images                ",
-                description: "在线图库",
-                imageType: 17,
-                path: "https://vs.20988.xyz/d/24-bei-jing-tu-tu-ku"
             }
         );
         list.items = items;
@@ -294,19 +276,13 @@ export class PickList {
                 label: "$(github)    Repository               ",
                 description: "仓库地址",
                 imageType: 13,
-                path: "https://github.com/AShujiao/vscode-background-cover"
+                path: "https://github.com/Paper-Folding/vscode-background-cover"
             },
             {
                 label: "$(issues)    Issues                       ",
                 description: "有疑问就来提问",
                 imageType: 13,
                 path: "https://github.com/AShujiao/vscode-background-cover/issues"
-            },
-            {
-                label: "$(star)    Star                           ",
-                description: "给作者点个Star吧",
-                imageType: 13,
-                path: "https://github.com/AShujiao/vscode-background-cover"
             }
         ];
 

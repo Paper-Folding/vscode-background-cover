@@ -2,7 +2,7 @@
   <br>
     <img src="https://user-images.githubusercontent.com/14969576/61449520-b55d9900-a987-11e9-9dc9-e81fa416688c.png" alt="logo" width="200">
   <br>
-  VS Code - Background Cover
+  VS Code - Background Cover (Without Webview With Spam Sites)
   <br>
 
   <br>
@@ -20,9 +20,6 @@ Add a picture you like to cover the entire vscode..
 </a>
 
 </p>
-
----
-  [集成在线图库](https://vs.20988.xyz/d/24-vscodebei-jing-tu-tu-ku)
 
 > **使用此扩展请以管理员身份运行vscode**
 
@@ -137,12 +134,6 @@ Add a picture you like to cover the entire vscode..
 
 * [GitHub](https://github.com/AShujiao/vscode-background-cover)
 * [Visual Studio|Marketplace](https://marketplace.visualstudio.com/items?itemName=manasxx.background-cover)
-
-
-**赞助**
-> 如果这个插件能够帮助到您，不介意的话，请作者喝一杯咖啡吧:) 
- 
-[<img alt="lauset" src="https://zuhaowan-video.oss-cn-beijing.aliyuncs.com/1587571200/177327269-5cd91cdc-ffeb-4e1d-9193-abe5d2bb6b95.jpg" width="300">](https://github.com/lauset)
 
 **Enjoy!**
 

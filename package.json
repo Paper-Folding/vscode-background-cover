@@ -37,22 +37,6 @@
             {
                 "command": "extension.backgroundCover.refresh",
                 "title": "backgroundCover - refresh"
-            },
-            {
-                "command": "backgroundCover.refreshEntry",
-                "title": "刷新",
-                "icon": {
-                    "light": "resources/light/refresh.svg",
-                    "dark": "resources/dark/refresh.svg"
-                }
-            },
-            {
-                "command": "backgroundCover.home",
-                "title": "首页",
-                "icon": {
-                    "light": "resources/light/home.svg",
-                    "dark": "resources/dark/home.svg"
-                }
             }
         ],
         "keybindings": [
@@ -90,45 +74,8 @@
                     "type": "string",
                     "default": "cover",
                     "description": "Background image size adaptive mode / 图片尺寸适应模式"
-                },
-                "backgroundCover.defaultOnlinePage": {
-                    "type": "string",
-                    "default": "https://vs.20988.xyz/d/24-vscodebei-jing-tu-tu-ku",
-                    "description": "Online images default page / 在线图库默认页面"
                 }
             }
-        },
-        "viewsContainers": {
-            "activitybar": [
-                {
-                    "id": "backgroundCover-explorer",
-                    "title": "backgroundCover",
-                    "icon": "resources/big.svg"
-                }
-            ]
-        },
-        "views": {
-            "backgroundCover-explorer": [
-                {
-                    "id": "backgroundCover.readerView",
-                    "type": "webview",
-                    "name": "backgroundCover"
-                }
-            ]
-        },
-        "menus": {
-            "view/title": [
-                {
-                    "command": "backgroundCover.refreshEntry",
-                    "when": "view == backgroundCover.readerView",
-                    "group": "navigation@1"
-                },
-                {
-                    "command": "backgroundCover.home",
-                    "when": "view == backgroundCover.readerView",
-                    "group": "navigation@0"
-                }
-            ]
         }
     },
     "bugs": {
@@ -137,9 +84,9 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/AShujiao/vscode-background-cover.git"
+        "url": "https://github.com/Paper-Folding/vscode-background-cover.git"
     },
-    "homepage": "https://github.com/AShujiao/vscode-background-cover/blob/master/README.md#manasxx-readme",
+    "homepage": "https://github.com/Paper-Folding/vscode-background-cover",
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "vscode:uninstall": "node ./out/uninstall",
@@ -157,5 +104,5 @@
         "prettier": "^3.3.2",
         "typescript": "^4.5.4"
     },
-    "packageManager": "yarn@4.3.1+sha512.af78262d7d125afbfeed740602ace8c5e4405cd7f4735c08feb327286b2fdb2390fbca01589bfd1f50b1240548b74806767f5a063c94b67e431aabd0d86f7774"
+    "packageManager": "yarn@4.3.1"
 }

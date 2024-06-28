@@ -32,7 +32,7 @@ export function activate(context: ExtensionContext) {
     let title: string = ex ? ex.packageJSON["one_title"] : "";
     if (openVersion != version && title != "") {
         context.globalState.update("ext_version", version);
-        vsHelp.showWebview("Background Cover extension loaded!");
+        vsHelp.showWebview(`Background Cover extension loaded! Version ${version}`);
     }
     setContext(context);
 }
