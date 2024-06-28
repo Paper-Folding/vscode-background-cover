@@ -1,7 +1,7 @@
 {
-    "name": "pure-vscode-background-cover",
-    "displayName": "pure-vscode-background-cover",
-    "description": "Add a picture you like to cover the entire vscode..",
+    "name": "vscode-background-cover-lite",
+    "displayName": "vscode-background-cover-lite",
+    "description": "Add a picture you like to cover the entire vscode. (Version that removes useless webview.)",
     "version": "3.5.2",
     "publisher": "Paper Folding",
     "engines": {
