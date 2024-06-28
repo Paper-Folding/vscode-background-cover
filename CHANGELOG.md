@@ -113,3 +113,6 @@
 #### ver 2.5.2 (2024/06/24)
 
   1.修复图片无法显示的bug
+
+#### ver 3.5.5 (2024/06/28)
+  - Remove useless webview targeting spam websites
