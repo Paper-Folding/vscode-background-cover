@@ -1,9 +1,9 @@
 {
-    "name": "background-cover",
-    "displayName": "background-cover",
+    "name": "@paper-folding/background-cover",
+    "displayName": "pure-background-cover",
     "description": "Add a picture you like to cover the entire vscode..",
-    "version": "2.5.2",
-    "publisher": "manasxx",
+    "version": "3.5.2",
+    "publisher": "Paper Folding",
     "engines": {
         "vscode": "^1.38.0"
     },
@@ -146,13 +146,16 @@
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
         "test": "npm run compile && node ./node_modules/vscode/bin/test",
-        "check": "tslint -p ./"
+        "check": "tslint -p ./",
+        "format-code": "prettier . --write"
     },
     "devDependencies": {
         "@types/mocha": "^5.2.7",
         "@types/node": "^12.20.42",
         "@types/vscode": "^1.30.0",
         "@vscode/test-electron": "^2.3.2",
+        "prettier": "^3.3.2",
         "typescript": "^4.5.4"
-    }
+    },
+    "packageManager": "yarn@4.3.1+sha512.af78262d7d125afbfeed740602ace8c5e4405cd7f4735c08feb327286b2fdb2390fbca01589bfd1f50b1240548b74806767f5a063c94b67e431aabd0d86f7774"
 }
