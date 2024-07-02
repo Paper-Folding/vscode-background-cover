@@ -77,10 +77,10 @@ Add a picture you like to cover the entire vscode..
 ## Latest Update History
 [Full Log](https://github.com/vscode-extension/vscode-background-cover/blob/master/CHANGELOG.md)
 
-#### ver 3.5.5 (2024/06/28)
+#### ver 3.5.6 (2024/06/30)
 
-  - Remove useless webview targeting spam websites
-  
+  1.修复mac下本地图片不显示问题
+
 ---
 ### Thanks
 
