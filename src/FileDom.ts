@@ -1,5 +1,6 @@
 import * as path from "path";
 import * as fs from "fs";
+import * as os from "os";
 import version from "./version";
 import { Uri, window, InputBoxOptions, commands } from "vscode";
 import { exec } from "child_process";
@@ -22,7 +23,13 @@ export class FileDom {
         }
         this.sizeModel = sizeModel;
         if (imagePath.substr(0, 8).toLowerCase() !== "https://") {
-            this.localImgToVsc();
+            // mac对vscodefile协议支持存在异常，所以mac下使用base64
+            var osType = os.type();
+            if (osType == "Darwin") {
+                this.imageToBase64();
+            } else {
+                this.localImgToVsc();
+            }
         }
     }
 

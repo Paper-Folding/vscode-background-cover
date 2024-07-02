@@ -114,5 +114,5 @@
 
   1.修复图片无法显示的bug
 
-#### ver 3.5.5 (2024/06/28)
-  - Remove useless webview targeting spam websites
+#### ver 3.5.6 (2024/06/30)
+  - 修复mac下本地图片不显示问题
