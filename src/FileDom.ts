@@ -1,37 +1,44 @@
-import * as path from "path";
-import * as fs from "fs";
-import * as os from "os";
-import version from "./version";
-import { Uri, window, InputBoxOptions, commands } from "vscode";
-import { exec } from "child_process";
-import vsHelp from "./vsHelp";
+import * as path from 'path';
+import * as fs from 'fs';
+import version from './version';
+import * as os from 'os';
+import {
+	Uri,
+	window,
+	InputBoxOptions,
+	commands,
+	env,
+  } from 'vscode';
+import { exec } from 'child_process';
+import vsHelp from './vsHelp';
 
 const cssName: string = version >= "1.38" ? "workbench.desktop.main.css" : "workbench.main.css";
 export class FileDom {
     // 文件路径
-    private filePath = path.join(path.dirname((require.main as NodeModule).filename), "vs", "workbench", cssName);
+	private filePath = path.join(env.appRoot, "out", "vs", "workbench", cssName);;//path.join(path.dirname((require.main as NodeModule).filename), 'vs', 'workbench', cssName);
     private extName = "backgroundCover";
     private imagePath: string = "";
     private imageOpacity: number = 1;
     private sizeModel: string = "cover";
 
-    constructor(imagePath: string, opacity: number, sizeModel: string = "cover") {
-        this.imagePath = imagePath;
-        this.imageOpacity = opacity;
-        if (sizeModel == "") {
-            sizeModel = "cover";
-        }
-        this.sizeModel = sizeModel;
-        if (imagePath.substr(0, 8).toLowerCase() !== "https://") {
-            // mac对vscodefile协议支持存在异常，所以mac下使用base64
-            var osType = os.type();
-            if (osType == "Darwin") {
-                this.imageToBase64();
-            } else {
-                this.localImgToVsc();
-            }
-        }
-    }
+	constructor(imagePath: string, opacity: number, sizeModel: string = 'cover') {
+		this.imagePath = imagePath;
+		this.imageOpacity = opacity;
+		if(sizeModel == ""){
+			sizeModel = "cover";
+		}
+		this.sizeModel = sizeModel;
+		if(imagePath.substr(0, 8).toLowerCase() !== 'https://'){
+			// mac对vscodefile协议支持存在异常，所以mac下使用base64
+			var osType = os.type()
+			if(osType == 'Darwin'){
+				this.imageToBase64();
+			}else{
+				this.localImgToVsc(osType);
+			}
+			
+		}
+	}
 
     public install(): boolean {
         let content: any = this.getCss().replace(/\s*$/, ""); // 去除末尾空白
@@ -118,36 +125,41 @@ export class FileDom {
 		}
 		/*ext-${this.extName}-end*/
 		`;
-    }
 
-    /**
-     * 获取文件内容
-     * @var mixed
-     */
-    private getContent(): string {
-        return fs.readFileSync(this.filePath, "utf-8");
-    }
+	}
 
-    /**
-     * 本地图片文件转base64
-     * @var mixed
-     */
-    public imageToBase64() {
-        try {
-            let extname = path.extname(this.imagePath);
-            extname = extname.substr(1);
-            this.imagePath = fs.readFileSync(path.resolve(this.imagePath)).toString("base64");
-            this.imagePath = `data:image/${extname};base64,${this.imagePath}`;
-        } catch (e) {
-            return false;
-        }
 
-        return true;
-    }
+	/**
+    * 获取文件内容
+    * @var mixed
+    */
+	private getContent(): string {
+		return fs.readFileSync(this.filePath, 'utf-8');
+	}
 
-    private localImgToVsc() {
-        var url = "vscode-file://vscode-app/" + this.imagePath;
-        this.imagePath = Uri.parse(url).toString();
+	/**
+    * 本地图片文件转base64
+    * @var mixed
+    */
+	public imageToBase64(){
+		try{
+			let extname    = path.extname(this.imagePath);
+			extname        = extname.substr(1);
+			this.imagePath = fs.readFileSync(path.resolve(this.imagePath)).toString('base64');
+			this.imagePath = `data:image/${extname};base64,${this.imagePath}`;
+		}catch(e){
+			return false;
+		}
+		
+		return true;
+	}
+
+
+    private localImgToVsc(ostype: string) {
+		var separator = ostype == "Linux" ? "" : "/";
+		
+		var url =  "vscode-file://vscode-app" + separator + this.imagePath
+		this.imagePath = Uri.parse(url).toString();
     }
 
     /**

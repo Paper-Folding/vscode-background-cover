@@ -267,7 +267,7 @@ export class PickList {
         let tmpPath = "file:///" + extPath + tmpUri;
         let tmpurl = Uri.parse(tmpPath);
 
-        commands.executeCommand("openFolder", tmpurl);
+		commands.executeCommand( 'vscode.openFolder', tmpurl );
     }
 
     private moreMenu() {
@@ -523,108 +523,116 @@ export class PickList {
         this.setConfigValue("sizeModel", value, true);
     }
 
-    public setImageFileType(value: number) {
-        this.imageFileType = value;
-    }
+	public setImageFileType( value: number ) {
+		this.imageFileType = value;
+	
+	}
 
-    // 更新配置
-    public updateBackgound(path?: string) {
-        if (!path) {
-            return vsHelp.showInfo("Unfetched Picture Path / 未获取到图片路径");
-        }
-        this.setConfigValue("imagePath", path);
-    }
+	// 更新配置
+	public updateBackgound( path?: string ) {
+		if ( !path ) {
+			return vsHelp.showInfo( 'Unfetched Picture Path / 未获取到图片路径' );
+		}
+		this.setConfigValue( 'imagePath', path );
+	}
 
-    // 文件、目录选择
-    private async openFieldDialog(type: number) {
-        let isFolders = type === 1 ? false : true;
-        let isFiles = type === 2 ? false : true;
-        let filters = type === 1 ? { Images: ["png", "jpg", "gif", "jpeg", "jfif"] } : undefined;
-        let folderUris = await window.showOpenDialog({
-            canSelectFolders: isFolders,
-            canSelectFiles: isFiles,
-            canSelectMany: false,
-            openLabel: "Select folder",
-            filters: filters
-        });
-        if (!folderUris) {
-            return false;
-        }
-        let fileUri = folderUris[0];
-        if (type === 2) {
-            this.setConfigValue("randomImageFolder", fileUri.fsPath, false);
-            return this.imgList(fileUri.fsPath);
-        }
-        if (type === 1) {
-            return this.setConfigValue("imagePath", fileUri.fsPath);
-        }
+	// 文件、目录选择
+	private async openFieldDialog( type: number ) {
+		let isFolders = type === 1 ? false : true;
+		let isFiles = type === 2 ? false : true;
+		let filters =
+			type === 1 ? { 'Images': ['png', 'jpg', 'gif', 'jpeg', 'jfif', 'webp', 'bmp'] } : undefined;
+		let folderUris = await window.showOpenDialog( {
+			canSelectFolders: isFolders,
+			canSelectFiles: isFiles,
+			canSelectMany: false,
+			openLabel: 'Select folder',
+			filters: filters
+		} );
+		if ( !folderUris ) {
+			return false;
+		}
+		let fileUri = folderUris[0];
+		if ( type === 2 ) {
+			this.setConfigValue( 'randomImageFolder', fileUri.fsPath, false );
+			return this.imgList( fileUri.fsPath );
+		}
+		if ( type === 1 ) {
+			return this.setConfigValue( 'imagePath', fileUri.fsPath );
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    // 更新配置
-    private setConfigValue(name: string, value: any, updateDom: Boolean = true) {
-        // 更新变量
-        this.config.update(name, value, ConfigurationTarget.Global);
-        switch (name) {
-            case "opacity":
-                this.opacity = value;
-                break;
-            case "imagePath":
-                this.imgPath = value;
-                break;
-            case "sizeModel":
-                this.sizeModel = value;
-                break;
-            default:
-                break;
-        }
-        // 是否需要更新Dom
-        if (updateDom) {
-            this.updateDom();
-        }
-        return true;
-    }
+	// 更新配置
+	private setConfigValue( name: string, value: any, updateDom: Boolean = true ) {
+		// 更新变量
+		this.config.update( name, value, ConfigurationTarget.Global );
+		switch ( name ) {
+			case 'opacity':
+				this.opacity = value;
+				break;
+			case 'imagePath':
+				this.imgPath = value;
+				break;
+			case 'sizeModel':
+				this.sizeModel = value;
+				break;
+			default:
+				break;
+		}
+		// 是否需要更新Dom
+		if ( updateDom ) {
+			this.updateDom();
+		}
+		return true;
+	}
 
-    // 更新、卸载css
-    private updateDom(uninstall: boolean = false) {
-        let dom: FileDom = new FileDom(this.imgPath, this.opacity, this.sizeModel);
-        let result = false;
-        if (uninstall) {
-            result = dom.uninstall();
-        } else {
-            if (this.osType === 1) {
-                result = dom.install();
-            } else if (this.osType === 2) {
-                result = dom.installMac();
-            } else if (this.osType === 3) {
-                result = dom.install(); // 暂未做对应处理
-            }
-        }
-        if (result) {
-            if (this.quickPick) {
-                this.quickPick.placeholder = "Reloading takes effect? / 重新加载生效？";
-                this.quickPick.items = [
-                    {
-                        label: "$(check)   YES",
-                        description: "立即重新加载窗口生效",
-                        imageType: 8
-                    },
-                    { label: "$(x)   NO", description: "稍后手动重启", imageType: 9 }
-                ];
-                this.quickPick.ignoreFocusOut = true;
-                this.quickPick.show();
-            } else {
-                // 通过在线图库更新提示弹窗
-                if (this.imageFileType == 2) {
-                    // 弹出提示框确认是否重启
-                    window.showInformationMessage('"' + this.imgPath + '"' + " | Reloading takes effect? / 重新加载生效？", "YES", "NO").then((value) => {
-                        if (value === "YES") {
-                            commands.executeCommand("workbench.action.reloadWindow");
-                        }
-                    });
-                }
-            }
-        }
-    }
+
+	// 更新、卸载css
+	private updateDom( uninstall: boolean = false ) {
+		let dom: FileDom = new FileDom( this.imgPath, this.opacity, this.sizeModel );
+		let result = false;
+		if ( uninstall ) {
+			result = dom.uninstall();
+		} else {
+			if ( this.osType === 1 ) {
+				result = dom.install();
+			} else if ( this.osType === 2 ) {
+				result = dom.installMac();
+			} else if ( this.osType === 3 ) {
+				result = dom.install(); // 暂未做对应处理
+			}
+		}
+		if ( result ) {
+			if ( this.quickPick ) {
+				this.quickPick.placeholder = 'Reloading takes effect? / 重新加载生效？';
+				this.quickPick.items = [
+					{
+						label: '$(check)   YES',
+						description: '立即重新加载窗口生效',
+						imageType: 8
+					},
+					{ label: '$(x)   NO', description: '稍后手动重启', imageType: 9 }
+				];
+				this.quickPick.ignoreFocusOut = true;
+				this.quickPick.show();
+			} else {
+
+				// 通过在线图库更新提示弹窗
+				if ( this.imageFileType == 2 ) {
+					// 弹出提示框确认是否重启
+					window.showInformationMessage(
+						'"' + this.imgPath + '"' + ' | Reloading takes effect? / 重新加载生效？', 'YES', 'NO' ).then(
+							( value ) => {
+								if ( value === 'YES' ) {
+									commands.executeCommand(
+										'workbench.action.reloadWindow' );
+								}
+							} );
+				}
+			}
+
+		}
+	}
 }
