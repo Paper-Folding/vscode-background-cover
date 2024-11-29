@@ -27,7 +27,7 @@ export function activate(context: ExtensionContext) {
 
     // 首次打开-提示语
     let openVersion: string | undefined = context.globalState.get("ext_version");
-    let ex: Extension<any> | undefined = extensions.getExtension("manasxx.background-cover");
+    let ex: Extension<any> | undefined = extensions.getExtension("PaperFolding.vscode-background-cover-lite");
     let version: string = ex ? ex.packageJSON["version"] : "";
     let title: string = ex ? ex.packageJSON["one_title"] : "";
     if (openVersion != version && title != "") {

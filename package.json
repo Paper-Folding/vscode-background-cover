@@ -2,7 +2,7 @@
     "name": "vscode-background-cover-lite",
     "displayName": "vscode-background-cover-lite",
     "description": "Add a picture you like to cover the entire vscode. (Version that removes useless webview.)",
-    "version": "3.5.7",
+    "version": "3.6.2",
     "publisher": "PaperFolding",
     "engines": {
         "vscode": "^1.38.0"
@@ -55,6 +55,13 @@
                     "default": 0.2,
                     "description": "Background opacity (0 - 1) / 背景透明度(0 - 1)"
                 },
+                "backgroundCover.blur": {
+                    "type": "number",
+                    "maximum": 100,
+                    "minimum": 0,
+                    "default": 0,
+                    "description": "Background blur (0 - 100) / 背景模糊(0 - 100)"
+                },
                 "backgroundCover.imagePath": {
                     "type": "string",
                     "default": "",
@@ -72,15 +79,37 @@
                 },
                 "backgroundCover.sizeModel": {
                     "type": "string",
+                    "enum": [
+                        "cover",
+                        "repeat",
+                        "contain",
+                        "not_center",
+                        "not_right_bottom",
+                        "not_right_top",
+                        "not_left",
+                        "not_right",
+                        "not_top",
+                        "not_bottom"
+                    ],
                     "default": "cover",
                     "description": "Background image size adaptive mode / 图片尺寸适应模式"
+                },
+                "backgroundCover.blendModel": {
+                    "type": "string",
+                    "enum": [
+                        "auto",
+                        "multiply",
+                        "lighten"
+                    ],
+                    "default": "cover",
+                    "description": "Background image blend mode / 图片文字混合模式，对应主题模式"
+                
                 }
             }
         }
     },
     "bugs": {
-        "url": "https://github.com/AShujiao/vscode-background-cover/issues",
-        "email": "a916817706@live.com"
+        "url": "https://github.com/Paper-Folding/vscode-background-cover/issues"
     },
     "repository": {
         "type": "git",
@@ -98,12 +127,20 @@
         "format-code": "prettier . --write"
     },
     "devDependencies": {
+        "@types/fs-extra": "^11.0.4",
+        "@types/lockfile": "^1.0.4",
         "@types/mocha": "^5.2.7",
-        "@types/node": "^12.20.42",
+        "@types/node": "^22.9.0",
         "@types/vscode": "^1.30.0",
         "@vscode/test-electron": "^2.3.2",
         "@vscode/vsce": "^2.29.0",
         "prettier": "^3.3.2",
         "typescript": "^4.5.4"
+    },
+    "dependencies": {
+        "async-mutex": "^0.5.0",
+        "fs-extra": "^11.2.0",
+        "lockfile": "^1.0.4",
+        "sudo-prompt": "^9.2.1"
     }
 }
