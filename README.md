@@ -2,7 +2,7 @@
   <br>
     <img src="resources/background-cover.png" alt="logo" width="200">
   <br>
-  VS Code - Background Cover (Without Webview With Spam Sites)
+  VS Code - Background Cover (Drop Webview with Spam Sites)
   <br>
 </h1>
 
@@ -15,7 +15,7 @@ Add a picture you like to cover the entire vscode, as well as the particle effec
 
 > Please configure it through the plug-in configuration command or the bottom button (do not modify the configuration parameters manually)
 
-> **升级到2.6.2及以上时，如果出现背景重叠的情况，请关闭vsc重新打开即可。因为旧版本的重载不生效导致的**
+> **升级到3.6.2及以上时，如果出现背景重叠的情况，请关闭vsc重新打开即可。因为旧版本的重载不生效导致的**
 
 ## Warning
 
