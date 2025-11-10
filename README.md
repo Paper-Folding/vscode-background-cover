@@ -7,18 +7,15 @@
 </h1>
 
 <p align="center">
-Add a picture you like to cover the entire vscode..
+Add a picture you like to cover the entire vscode, as well as the particle effect animation that follows the mouse<br/>
 <br/>
-<a href="https://github.com/vscode-extension/vscode-background-cover">
-</a>
+添加一张你喜欢的图片铺满整个vscode, 以及鼠标跟随的粒子效果动画
+<br/>
 </p>
 
 > Please configure it through the plug-in configuration command or the bottom button (do not modify the configuration parameters manually)
 
-## It looks like:
-![](https://github.com/AShujiao/vscode-maxPlus/assets/14969576/df3089cd-d370-4b41-ac0b-777038dd6323)
-![](https://github.com/AShujiao/vscode-maxPlus/assets/14969576/5533db3e-9a2b-46e5-a41d-df103141d0cd)
-![](https://github.com/AShujiao/vscode-maxPlus/assets/14969576/20172d72-5384-4bfe-bceb-ec582cfb1698)
+> **升级到2.6.2及以上时，如果出现背景重叠的情况，请关闭vsc重新打开即可。因为旧版本的重载不生效导致的**
 
 ## Warning
 
@@ -28,7 +25,20 @@ Add a picture you like to cover the entire vscode..
 ![](https://user-images.githubusercontent.com/14969576/47090529-b1b0b080-d255-11e8-8812-d541cb1c3852.png)
 
 
-## Config
+
+---
+
+
+>请通过插件配置命令或底部按钮进行配置（不要手动修改配置参数）
+
+
+>Please configure it through the plug-in configuration command or the bottom button (do not modify the configuration parameters manually)
+
+
+
+## Config 配置项
+
+> 2.0 版本开始你只需要通过插件自带的配置项进行使用即可
 
 > Starting with version 2.0, you only need to use the configuration items that come with the plug-in.
 
@@ -77,20 +87,15 @@ Add a picture you like to cover the entire vscode..
 ## Latest Update History
 [Full Log](https://github.com/vscode-extension/vscode-background-cover/blob/master/CHANGELOG.md)
 
-#### ver 3.6.2 (2024/11/12)
+#### ver 3.7.0 (2025/05/05)
 
-  1.底层实现方式由css改为js（修复重载不生效的问题）
-  2.增加背景模糊效果
-  3.自动获取文件写入权限（无需管理员身份运行）
-  4.监听主题变化，自动触发适配背景提醒
-  5.增加备份源文件，方便异常手动恢复
-  6.部分代码优化
-
+  1.🎉新功能：~鼠标跟随粒子效果🎉 （原[vscode-nest](https://github.com/AShujiao/vscode-nest)插件已弃用，集成到本扩展中）  
+  2.部分配置输入框显示当前配置值
+  
 ---
 ### Thanks
 
-* [vscode-background](https://github.com/shalldie/vscode-background)
-* [feature_restart_random_image](https://github.com/AShujiao/vscode-background-cover/pull/2)
+* [vscode-background](https://github.com/AShujiao/vscode-background-cover)
 
 ### Links
 

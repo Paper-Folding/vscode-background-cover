@@ -25,14 +25,6 @@ const vsHelp = {
             commands.executeCommand("workbench.action.reloadWindow");
         });
     },
-    showWebview(content: any): Thenable<void> {
-        return window.showInformationMessage(content, { title: "OK" }).then(function (item) {
-            if (!item) {
-                return;
-            }
-            commands.executeCommand("workbench.view.extension.backgroundCover-explorer");
-        });
-    }
 };
 
 export default vsHelp;
