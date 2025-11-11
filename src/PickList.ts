@@ -1,5 +1,5 @@
-import * as fs from "fs";
-import * as path from "path";
+import fs from "fs";
+import path from "path";
 import { commands, ConfigurationTarget, Disposable, env, extensions, InputBoxOptions, QuickPick, QuickPickItemKind, Uri, window, workspace, WorkspaceConfiguration } from "vscode";
 
 import bleandHelper from "./blendHelper";

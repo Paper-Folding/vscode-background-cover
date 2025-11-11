@@ -66,6 +66,12 @@ Add a picture you like to cover the entire vscode, as well as the particle effec
 
 ---
 
+    Q:Seems not working on Code Server?
+
+    A:Make you are using a valid https image url, after applying and reloading page, press `ctrl + F5` to force invalidating cache and refresh page to make it work.
+
+---
+
     Q:It seems that nothing happens after installing the extension?
 
     A:Make sure to have the administrator authority！！
@@ -85,11 +91,13 @@ Add a picture you like to cover the entire vscode, as well as the particle effec
 ---
 
 ## Latest Update History
-[Full Log](https://github.com/vscode-extension/vscode-background-cover/blob/master/CHANGELOG.md)
+[Full Log](https://github.com/Paper-Folding/vscode-background-cover/blob/master/CHANGELOG.md)
 
-#### ver 3.7.1 (2025/11/11)
+#### ver 3.7.1~3.7.2 (2025/11/11)
 
-    Add support for Code Server
+    1.Add support for Code Server
+    2.Update extension dependencies and metadata
+    3.Clean up some code and optimize import, so extension size is reduced
 
 
 ---

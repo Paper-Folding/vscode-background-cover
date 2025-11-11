@@ -4,7 +4,7 @@
 
 import { commands, Extension, ExtensionContext, extensions, StatusBarAlignment, version as vscodeVersion, window, workspace } from "vscode";
 import { setContext } from "./global";
-import { PickList } from "./PickLIst";
+import { PickList } from "./PickList";
 import vsHelp from "./vsHelp";
 
 // this method is called when your extension is activated
