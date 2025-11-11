@@ -3,7 +3,7 @@
     "displayName": "vscode-background-cover-lite",
     "description": "Add a picture you like to cover the entire vscode. (Version that removes useless webview.)",
     "version": "3.7.1",
-    "publisher": "PaperFolding",
+    "publisher": "Paper-Folding",
     "engines": {
         "vscode": "^1.38.0"
     },
@@ -104,7 +104,6 @@
                     ],
                     "default": "cover",
                     "description": "Background image blend mode / 图片文字混合模式，对应主题模式"
-                
                 }
             }
         }
@@ -131,16 +130,17 @@
         "@types/fs-extra": "^11.0.4",
         "@types/lockfile": "^1.0.4",
         "@types/mocha": "^5.2.7",
-        "@types/node": "^22.9.0",
+        "@types/node": "^22.19.0",
         "@types/vscode": "^1.30.0",
-        "@vscode/test-electron": "^2.3.2",
+        "@vscode/test-electron": "^2.5.2",
         "@vscode/vsce": "^3.7.0",
-        "prettier": "^3.3.2",
+        "prettier": "^3.6.2",
+        "prettier-plugin-organize-imports": "^4.3.0",
         "typescript": "^4.5.4"
     },
     "dependencies": {
         "async-mutex": "^0.5.0",
-        "fs-extra": "^11.2.0",
+        "fs-extra": "^11.3.2",
         "lockfile": "^1.0.4",
         "sudo-prompt": "^9.2.1"
     }

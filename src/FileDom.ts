@@ -1,13 +1,13 @@
-import fs from 'fs';
-import path from 'path';
-import os from 'os';
-import { Uri, window, WorkspaceConfiguration } from 'vscode';
-import lockfile from 'lockfile';
-import version from './version';
-import { SudoPromptHelper } from './SudoPromptHelper';
-import fse from 'fs-extra';
-import { getContext } from './global';
-import { cssFile, extName, jsBakFile, jsFile } from './const';
+import fs from "fs";
+import fse from "fs-extra";
+import lockfile from "lockfile";
+import os from "os";
+import path from "path";
+import { Uri, window, WorkspaceConfiguration } from "vscode";
+import { cssFile, extName, jsBakFile, jsFile } from "./const";
+import { getContext } from "./global";
+import { SudoPromptHelper } from "./SudoPromptHelper";
+import version from "./version";
 
 enum SystemType {
     WINDOWS = "Windows_NT",
@@ -25,21 +25,14 @@ export class FileDom {
     private readonly systemType: string;
     private upCssContent: string = "";
     private bakStatus: boolean = false;
-    private bakJsContent: string = '';
+    private bakJsContent: string = "";
     private workConfig: WorkspaceConfiguration;
 
-    constructor(
-        workConfig:WorkspaceConfiguration,
-        imagePath: string,
-        opacity: number,
-        sizeModel: string = 'cover',
-        blur: number = 0,
-        blendModel: string = ''
-    ) {
+    constructor(workConfig: WorkspaceConfiguration, imagePath: string, opacity: number, sizeModel: string = "cover", blur: number = 0, blendModel: string = "") {
         this.workConfig = workConfig;
-        this.blendModel   = blendModel || this.workConfig.get('blendModel', '');
-        this.filePath     = jsFile;
-        this.imagePath    = imagePath;
+        this.blendModel = blendModel || this.workConfig.get("blendModel", "");
+        this.filePath = jsFile;
+        this.imagePath = imagePath;
         this.imageOpacity = Math.min(opacity, 0.8);
         this.sizeModel = sizeModel || "cover";
         this.blur = blur;
@@ -210,7 +203,7 @@ export class FileDom {
     private getJs(): string {
         let css = this.getCss();
         let particleJs = this.getParticleJs();
-        
+
         return `
         /*ext-${extName}-start*/
         /*ext.${extName}.ver.${version}*/
@@ -223,19 +216,18 @@ export class FileDom {
     }
 
     private getParticleJs(): string {
-        
         let context = getContext();
         // 如果粒子效果未启用，则返回空字符串
-        if (!context.globalState.get('backgroundCoverParticleEffect', false)) {
-            return '';
+        if (!context.globalState.get("backgroundCoverParticleEffect", false)) {
+            return "";
         }
-        
+
         // 获取粒子效果的配置
- 
-        const opacity = context.globalState.get('backgroundCoverParticleOpacity', 0.6);
-        const color = context.globalState.get('backgroundCoverParticleColor', '#ffffff');
-        const count = context.globalState.get('backgroundCoverParticleCount', 50);
-        
+
+        const opacity = context.globalState.get("backgroundCoverParticleOpacity", 0.6);
+        const color = context.globalState.get("backgroundCoverParticleColor", "#ffffff");
+        const count = context.globalState.get("backgroundCoverParticleCount", 50);
+
         // 粒子效果的 JS 代码
         return `
         // 粒子效果注入

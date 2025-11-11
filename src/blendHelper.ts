@@ -1,4 +1,4 @@
-import { window, ColorThemeKind } from "vscode";
+import { ColorThemeKind, window } from "vscode";
 
 const blendHelper = {
     autoBlendModel(): string {

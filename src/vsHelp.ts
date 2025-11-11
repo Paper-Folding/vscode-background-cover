@@ -1,4 +1,4 @@
-import { window, commands } from "vscode";
+import { commands, window } from "vscode";
 
 const vsHelp = {
     /**
@@ -24,7 +24,7 @@ const vsHelp = {
             }
             commands.executeCommand("workbench.action.reloadWindow");
         });
-    },
+    }
 };
 
 export default vsHelp;
