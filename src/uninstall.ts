@@ -5,14 +5,8 @@
  * @FilePath: \vscode-background-cover\src\uninstall.ts
  */
 
-import * as path from "path";
-import * as fs from "fs";
-
-const base = process.cwd();
-// 文件路径
-const jsName: string = "workbench.desktop.main.js";
-const filePath = path.join(base, "resources", "app", "out", "vs", "workbench", jsName);
-const extName = "backgroundCover";
+import fs from "fs";
+import { extName, jsFile } from "./const";
 
 //执行清理
 main();
@@ -34,7 +28,7 @@ function main() {
  * @var mixed
  */
 function getContent(): string {
-    return fs.readFileSync(filePath, "utf-8");
+    return fs.readFileSync(jsFile, "utf-8");
 }
 /**
  * 清理已经添加的代码
@@ -56,5 +50,5 @@ function clearCssContent(content: string): string {
  * @param {string} content
  */
 function saveContent(content: string): void {
-    fs.writeFileSync(filePath, content, "utf-8");
+    fs.writeFileSync(jsFile, content, "utf-8");
 }

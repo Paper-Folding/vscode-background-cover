@@ -1,19 +1,13 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import * as os from 'os';
-import { env, Uri, window, WorkspaceConfiguration } from 'vscode';
-import * as lockfile from 'lockfile';
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
+import { Uri, window, WorkspaceConfiguration } from 'vscode';
+import lockfile from 'lockfile';
 import version from './version';
 import { SudoPromptHelper } from './SudoPromptHelper';
-import * as fse from 'fs-extra';
+import fse from 'fs-extra';
 import { getContext } from './global';
-
-const jsName: string  = 'workbench.desktop.main.js';
-const cssName: string = 'workbench.desktop.main.css';
-const bakName: string = 'workbench.desktop.main.js.bak';
-const jsFilePath      = path.join(env.appRoot, "out", "vs", "workbench", jsName);
-const cssFilePath     = path.join(env.appRoot, "out", "vs", "workbench", cssName);
-const bakFilePath     = path.join(env.appRoot, "out", "vs", "workbench", bakName);
+import { cssFile, extName, jsBakFile, jsFile } from './const';
 
 enum SystemType {
     WINDOWS = "Windows_NT",
@@ -23,7 +17,6 @@ enum SystemType {
 
 export class FileDom {
     private readonly filePath: string;
-    private readonly extName = "backgroundCover";
     private imagePath: string;
     private readonly imageOpacity: number;
     private readonly sizeModel: string;
@@ -45,7 +38,7 @@ export class FileDom {
     ) {
         this.workConfig = workConfig;
         this.blendModel   = blendModel || this.workConfig.get('blendModel', '');
-        this.filePath     = jsFilePath;
+        this.filePath     = jsFile;
         this.imagePath    = imagePath;
         this.imageOpacity = Math.min(opacity, 0.8);
         this.sizeModel = sizeModel || "cover";
@@ -80,7 +73,7 @@ export class FileDom {
         // 尝试5次清除旧版css文件
         if (clearCssNum <= 5) {
             // 验证旧版css文件是否需要清除
-            const cssContent = this.getContent(cssFilePath);
+            const cssContent = this.getContent(cssFile);
             if (this.getPatchContent(cssContent)) {
                 // 清除旧版css文件
                 this.upCssContent = this.clearCssContent(cssContent);
@@ -91,7 +84,7 @@ export class FileDom {
         }
 
         // 备份文件是否存在
-        const bakExist = await fse.pathExists(bakFilePath);
+        const bakExist = await fse.pathExists(jsBakFile);
         if (!bakExist) {
             this.bakStatus = true;
             // 触发备份提醒用户稍等片刻
@@ -175,11 +168,11 @@ export class FileDom {
         // 清除旧版css文件
         if (this.upCssContent) {
             try {
-                await fse.writeFile(cssFilePath, this.upCssContent, { encoding: "utf-8" });
+                await fse.writeFile(cssFile, this.upCssContent, { encoding: "utf-8" });
             } catch (err) {
                 // 权限不足,根据不同系统获取创建文件权限
-                await this.getFilePermission(cssFilePath);
-                await fse.writeFile(cssFilePath, this.upCssContent, { encoding: "utf-8" });
+                await this.getFilePermission(cssFile);
+                await fse.writeFile(cssFile, this.upCssContent, { encoding: "utf-8" });
             }
             this.upCssContent = "";
         }
@@ -194,23 +187,23 @@ export class FileDom {
 
     private async bakFile(): Promise<void> {
         try {
-            await fse.writeFile(bakFilePath, this.bakJsContent, { encoding: "utf-8" });
+            await fse.writeFile(jsBakFile, this.bakJsContent, { encoding: "utf-8" });
         } catch (err) {
             // 权限不足,根据不同系统获取创建文件权限
             if (this.systemType === SystemType.WINDOWS) {
                 // 使用cmd命令创建文件
-                await SudoPromptHelper.exec(`echo. > "${bakFilePath}"`);
-                await SudoPromptHelper.exec(`icacls "${bakFilePath}" /grant Users:F`);
+                await SudoPromptHelper.exec(`echo. > "${jsBakFile}"`);
+                await SudoPromptHelper.exec(`icacls "${jsBakFile}" /grant Users:F`);
             } else if (this.systemType === SystemType.MACOS) {
                 // 使用命令创建文件并赋予权限
-                await SudoPromptHelper.exec(`touch "${bakFilePath}"`);
-                await SudoPromptHelper.exec(`chmod a+rwx "${bakFilePath}"`);
+                await SudoPromptHelper.exec(`touch "${jsBakFile}"`);
+                await SudoPromptHelper.exec(`chmod a+rwx "${jsBakFile}"`);
             } else if (this.systemType === SystemType.LINUX) {
                 // 使用命令创建文件并赋予权限
-                await SudoPromptHelper.exec(`touch "${bakFilePath}"`);
-                await SudoPromptHelper.exec(`chmod 666 "${bakFilePath}"`);
+                await SudoPromptHelper.exec(`touch "${jsBakFile}"`);
+                await SudoPromptHelper.exec(`chmod 666 "${jsBakFile}"`);
             }
-            await fse.writeFile(bakFilePath, this.bakJsContent, { encoding: "utf-8" });
+            await fse.writeFile(jsBakFile, this.bakJsContent, { encoding: "utf-8" });
         }
     }
 
@@ -219,13 +212,13 @@ export class FileDom {
         let particleJs = this.getParticleJs();
         
         return `
-        /*ext-${this.extName}-start*/
-        /*ext.${this.extName}.ver.${version}*/
+        /*ext-${extName}-start*/
+        /*ext.${extName}.ver.${version}*/
         const style = document.createElement('style');
         style.textContent = \`${css}\`;
         document.head.appendChild(style);
         ${particleJs}
-        /*ext-${this.extName}-end*/
+        /*ext-${extName}-end*/
         `;
     }
 
@@ -337,7 +330,7 @@ export class FileDom {
     }
 
     private clearCssContent(content: string): string {
-        const regex = new RegExp(`\\/\\*ext-${this.extName}-start\\*\\/[\\s\\S]*?\\/\\*ext-${this.extName}-end\\*\\/`, "g");
+        const regex = new RegExp(`\\/\\*ext-${extName}-start\\*\\/[\\s\\S]*?\\/\\*ext-${extName}-end\\*\\/`, "g");
         return content.replace(regex, "").trim();
     }
 
